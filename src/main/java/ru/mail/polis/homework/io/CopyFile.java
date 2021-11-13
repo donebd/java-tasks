@@ -66,14 +66,10 @@ public class CopyFile {
             }
 
             @Override
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
                 Path current = to.resolve(from.relativize(dir));
                 if (Files.notExists(current)) {
-                    try {
                         Files.createDirectory(current);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
                 return CONTINUE;
             }
